@@ -1,0 +1,15 @@
+// main colors: 
+$color-green: green;
+$color-purple: purple;
+$color-black: black;
+$color-black-transparent: rgba(0, 0, 0, 0.3);
+
+// variants colors :
+$color-primary: $color-green;
+$color-secondary: $color-purple;
+
+// breakpoints :
+$breakpoints : (
+    "tablet": 768px,
+    "desktop": 900px
+);

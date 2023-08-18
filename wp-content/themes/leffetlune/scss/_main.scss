@@ -1,0 +1,49 @@
+*, ::before, ::after
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body
+{
+    --admin-bar-size: 0;
+    height: 100dvh;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(../assets/images/portrait-cave-1.jpg);
+    @include media("desktop")
+    {
+        background-image: url(../assets/images/landscape-cave-1.jpg);
+    }
+    &.admin-bar
+    {
+        --admin-bar-size: 46px;
+        padding-bottom: var(--admin-bar-size);
+        @include media("tablet")
+        {
+            --admin-bar-size: 32px;
+            padding-bottom: var(--admin-bar-size);
+        }
+    }
+    div.page
+    {
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        position: relative;
+        main.content
+        {
+            overflow-y: auto;
+            z-index: 10;
+        }
+        canvas#background
+        {
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: $color-black-transparent;
+        }
+    }
+}

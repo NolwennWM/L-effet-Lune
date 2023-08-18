@@ -1,0 +1,105 @@
+header.header
+{
+    z-index: 15;
+    nav#header-navigation
+    {
+        button.burger
+        {
+            background-color: $color-primary;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: none;
+            transition: scale .5s, top .5s, right .5s, translate .5s;
+            z-index: 1;
+            span.line
+            {
+                width: 33%;
+                height: 5%;
+                background-color: $color-secondary;
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                translate: -50% -50%;
+                transform-origin: center;
+                transition: top .3s, rotate .3s;
+                &:nth-child(1)
+                {
+                    top: 40%;
+                }
+                &:nth-child(3)
+                {
+                    top: 60%;
+                }
+            }
+        }
+        div.menu
+        {
+            overflow: hidden;
+            background-color: $color-black-transparent;
+            position: fixed;
+            top: 50%;
+            bottom: 50%;
+            left: 50%;
+            right: 50%;
+            transition: top .3s, left .3s, right .3s, bottom .3s;
+            
+            li.page_item
+            {
+                width: 80px;
+                height: 80px;
+                background-color: antiquewhite;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                translate: -50% -50%;
+                scale: 0;
+                transition: translate .3s, scale .3s, transform .3s;
+            }
+        }
+        &.open
+        {
+            button.burger
+            {
+                top: 50%;
+                right: 50%;
+                // scale: 0.8;
+                translate: 50% calc(-50% - var(--admin-bar-size) / 2);
+                span.line
+                {
+                    &:nth-child(1)
+                    {
+                        top: 50%;
+                        rotate: 45deg;
+                    }
+                    &:nth-child(2)
+                    {
+                        scale: 0;
+                    }
+                    &:nth-child(3)
+                    {
+                        top: 50%;
+                        rotate: -45deg;
+                    }
+                }
+            }
+            div.menu
+            {
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+        }
+        
+    }
+}
