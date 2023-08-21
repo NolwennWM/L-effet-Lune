@@ -6,7 +6,7 @@
 }
 body
 {
-    --admin-bar-size: 0;
+    --admin-bar-size: #{$admin-bar-none};
     height: 100dvh;
     overflow: hidden;
     background-size: cover;
@@ -18,11 +18,11 @@ body
     }
     &.admin-bar
     {
-        --admin-bar-size: 46px;
+        --admin-bar-size: #{$admin-bar-long};
         padding-bottom: var(--admin-bar-size);
         @include media("tablet")
         {
-            --admin-bar-size: 32px;
+            --admin-bar-size: #{$admin-bar-short};
             padding-bottom: var(--admin-bar-size);
         }
     }
@@ -36,6 +36,32 @@ body
         {
             overflow-y: auto;
             z-index: 10;
+            padding-bottom: $logo-small + $padding-small;
+            scrollbar-color: $color-primary-dark $color-primary-light;
+            &::-webkit-scrollbar
+            {
+                background-color: $color-primary-light;
+            }
+            &::-webkit-scrollbar-thumb
+            {
+                background-color: $color-primary-dark;
+            }
+            &::-webkit-scrollbar-button
+            {
+                background-color: $color-primary-light;
+                height: 13px;
+                border-style: solid;
+                &:decrement
+                {
+                    border-width: 0 8px 8px 8px;
+                    border-color: transparent transparent $color-primary-dark transparent;
+                }
+                &:increment
+                {
+                    border-width: 8px 8px 0 8px;
+                    border-color: $color-primary-dark transparent transparent transparent;
+                }
+            }
         }
         canvas#background
         {

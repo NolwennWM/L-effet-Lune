@@ -1,24 +1,37 @@
 "use strict";
 export class Navigation {
+    openClass;
+    transitionTrigger;
     navigation;
     burgerBtn = null;
     menu = null;
     menuItems = null;
     open = false;
     angle = 0;
-    constructor(selector) {
-        this.navigation = document.querySelector(selector);
+    /**
+     * Provoque l'ouverture et la fermeture d'un burger menu en fleur.
+     * @param navSelector selecteur css de la nav englobante
+     * @param menuSelector selecteur css du menu à déployer
+     * @param menuItemSelector selecteur css des item à déployer
+     * @param btnSelector selecteur css du bouton du menu
+     * @param openClass classe provoquant l'ouverture
+     * @param transitionTrigger transition qui doit provoquer l'ouverture du menu.
+     */
+    constructor(navSelector, menuSelector, menuItemSelector, btnSelector, openClass, transitionTrigger = "right") {
+        this.openClass = openClass;
+        this.transitionTrigger = transitionTrigger;
+        this.navigation = document.querySelector(navSelector);
         if (!this.navigation) {
             console.error(`Élément de navigation "parent" introuvable`);
             return;
         }
-        this.menu = this.navigation.querySelector("div.menu");
+        this.menu = this.navigation.querySelector(menuSelector);
         if (!this.menu) {
             console.error(`Élément de navigation "menu" introuvable`);
             return;
         }
-        this.menuItems = this.menu.querySelectorAll("ul li.page_item");
-        this.burgerBtn = this.navigation.querySelector("button.burger");
+        this.menuItems = this.menu.querySelectorAll(menuItemSelector);
+        this.burgerBtn = this.navigation.querySelector(btnSelector);
         if (!this.menuItems.length || !this.burgerBtn) {
             console.error(`Élément de navigation "burger" ou "li" introuvable`);
             return;
@@ -26,6 +39,9 @@ export class Navigation {
         this.angle = 360 / this.menuItems.length;
         this.setting();
     }
+    /**
+     * Paramètre les écouteurs dévènement et modifie le style de certains éléments.
+     */
     setting() {
         if (!this.burgerBtn || !this.menu || !this.menuItems)
             return;
@@ -42,6 +58,9 @@ export class Navigation {
             this.menuItems[i].style.transitionDuration = `${i + 2}80ms`;
         }
     }
+    /**
+     * Ouvre ou ferme le menu
+     */
     toggleMenu() {
         if (!this.navigation || !this.menuItems)
             return;
@@ -49,16 +68,23 @@ export class Navigation {
             this.witherMenu();
             return;
         }
-        this.navigation.classList.add("open");
+        this.navigation.classList.add(this.openClass);
         this.open = true;
     }
+    /**
+     * Ferme le menu
+     */
     closeMenu() {
         if (!this.navigation || this.open)
             return;
-        this.navigation.classList.remove("open");
+        this.navigation.classList.remove(this.openClass);
     }
+    /**
+     * Ouvre la fleur.
+     * @param e Transition Event
+     */
     bloomMenu(e) {
-        if (!this.menuItems || e.propertyName != "translate" || !this.open || !this.burgerBtn)
+        if (!this.menuItems || e.propertyName != this.transitionTrigger || !this.open || !this.burgerBtn)
             return;
         this.burgerBtn.style.scale = "0.8";
         let rot = 0;
@@ -69,11 +95,15 @@ export class Navigation {
             rot += this.angle;
         }
     }
+    /**
+     * Ferme la fleur.
+     * @param e Pointer Event ou undefined
+     */
     witherMenu(e = undefined) {
         if (!this.menuItems || e && e.target !== this.menu || !this.burgerBtn)
             return;
         this.open = false;
-        this.burgerBtn.style.scale = "0.8";
+        this.burgerBtn.style.scale = "";
         for (let i = 0; i < this.menuItems.length; i++) {
             const li = this.menuItems[i];
             li.style.scale = "";

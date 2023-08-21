@@ -1,12 +1,39 @@
+@use "sass:color";
 // main colors: 
-$color-green: green;
-$color-purple: purple;
+$color-green: #70DB45;
+$color-purple: #8F1183;
 $color-black: black;
 $color-black-transparent: rgba(0, 0, 0, 0.3);
 
 // variants colors :
 $color-primary: $color-green;
 $color-secondary: $color-purple;
+$color-primary-light: color.scale($color-primary, $lightness: 30%);
+$color-primary-dark: color.scale($color-primary, $lightness: -30%);
+$color-secondary-light: color.scale($color-secondary, $lightness: 30%);
+$color-secondary-dark: color.scale($color-secondary, $lightness: -30%);
+
+// gap, padding et margin :
+$gap-small: 10px;
+$padding-small: 10px;
+$margin-small: 1.5em;
+
+// logos :
+$logo-small: 50px;
+
+// transitions :
+$transition-short: .3s;
+$transition-normal: .5s;
+$transition-long: 1s;
+$bezier-fast-slow: cubic-bezier(0.19, 1, 0.22, 1);
+
+// Animations : 
+$pulse: pulse 8s infinite;
+
+// wordpress :
+$admin-bar-none: 0px;
+$admin-bar-short: 32px;
+$admin-bar-long: 46px;
 
 // breakpoints :
 $breakpoints : (

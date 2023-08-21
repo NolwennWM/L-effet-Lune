@@ -1,3 +1,14 @@
+@keyframes pulse {
+  from {
+    scale: 1.3;
+  }
+  50% {
+    scale: 1;
+  }
+  to {
+    scale: 1.3;
+  }
+}
 *, ::before, ::after {
   margin: 0;
   padding: 0;
@@ -5,7 +16,7 @@
 }
 
 body {
-  --admin-bar-size: 0;
+  --admin-bar-size: 0px;
   height: 100dvh;
   overflow: hidden;
   background-size: cover;
@@ -36,6 +47,27 @@ body div.page {
 body div.page main.content {
   overflow-y: auto;
   z-index: 10;
+  padding-bottom: 60px;
+  scrollbar-color: #48a921 #9be67d;
+}
+body div.page main.content::-webkit-scrollbar {
+  background-color: #9be67d;
+}
+body div.page main.content::-webkit-scrollbar-thumb {
+  background-color: #48a921;
+}
+body div.page main.content::-webkit-scrollbar-button {
+  background-color: #9be67d;
+  height: 13px;
+  border-style: solid;
+}
+body div.page main.content::-webkit-scrollbar-button:decrement {
+  border-width: 0 8px 8px 8px;
+  border-color: transparent transparent #48a921 transparent;
+}
+body div.page main.content::-webkit-scrollbar-button:increment {
+  border-width: 8px 8px 0 8px;
+  border-color: #48a921 transparent transparent transparent;
 }
 body div.page canvas#background {
   z-index: 1;
@@ -47,9 +79,11 @@ body div.page canvas#background {
 
 header.header {
   z-index: 15;
+  background-color: #70DB45;
 }
 header.header nav#header-navigation button.burger {
-  background-color: green;
+  cursor: pointer;
+  background-color: #48a921;
   position: absolute;
   top: 20px;
   right: 20px;
@@ -63,14 +97,14 @@ header.header nav#header-navigation button.burger {
 header.header nav#header-navigation button.burger span.line {
   width: 33%;
   height: 5%;
-  background-color: purple;
+  background-color: #8F1183;
   display: block;
   position: absolute;
   top: 50%;
   left: 50%;
   translate: -50% -50%;
   transform-origin: center;
-  transition: top 0.3s, rotate 0.3s;
+  transition: top 1s, rotate 1s;
 }
 header.header nav#header-navigation button.burger span.line:nth-child(1) {
   top: 40%;
@@ -78,7 +112,10 @@ header.header nav#header-navigation button.burger span.line:nth-child(1) {
 header.header nav#header-navigation button.burger span.line:nth-child(3) {
   top: 60%;
 }
-header.header nav#header-navigation div.menu {
+header.header nav#header-navigation button.burger:hover {
+  scale: 1.2;
+}
+header.header nav#header-navigation ul.menu {
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.3);
   position: fixed;
@@ -88,10 +125,11 @@ header.header nav#header-navigation div.menu {
   right: 50%;
   transition: top 0.3s, left 0.3s, right 0.3s, bottom 0.3s;
 }
-header.header nav#header-navigation div.menu li.page_item {
-  width: 80px;
-  height: 80px;
-  background-color: antiquewhite;
+header.header nav#header-navigation ul.menu li.menu-item {
+  width: 90px;
+  aspect-ratio: 1/1;
+  padding: 5px;
+  background-color: #9be67d;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -103,6 +141,17 @@ header.header nav#header-navigation div.menu li.page_item {
   translate: -50% -50%;
   scale: 0;
   transition: translate 0.3s, scale 0.3s, transform 0.3s;
+}
+header.header nav#header-navigation ul.menu li.menu-item a {
+  color: #8F1183;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 header.header nav#header-navigation.open button.burger {
   top: 50%;
@@ -120,11 +169,83 @@ header.header nav#header-navigation.open button.burger span.line:nth-child(3) {
   top: 50%;
   rotate: -45deg;
 }
-header.header nav#header-navigation.open div.menu {
+header.header nav#header-navigation.open ul.menu {
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+footer#footer {
+  z-index: 13;
+  position: absolute;
+  background-color: #70DB45;
+  gap: 10px;
+  padding: 10px;
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-height: 80dvh;
+  translate: 0 calc(100% - 25px);
+  bottom: 0;
+  width: 100%;
+  transition: translate 0.3s;
+}
+footer#footer span.footer-button {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 50%;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% -50%;
+  width: 50px;
+  aspect-ratio: 1/1;
+  background-color: #70DB45;
+  transition: rotate 1s, scale 0.3s;
+  animation: pulse 8s infinite;
+}
+footer#footer span.footer-button img {
+  width: 100%;
+  height: 100%;
+}
+footer#footer span.footer-button::after {
+  content: "";
+  height: 150%;
+  width: 25px;
+  background: white;
+  opacity: 0.2;
+  position: absolute;
+  top: -20%;
+  left: -100%;
+  rotate: 35deg;
+  transition: left 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+footer#footer span.footer-button:hover {
+  scale: 1.5;
+}
+footer#footer span.footer-button:hover::after {
+  left: 120%;
+}
+footer#footer ul {
+  list-style: none;
+  line-height: 1.3em;
+}
+footer#footer div.author {
+  width: 100%;
+  text-align: center;
+  font-size: 0.8em;
+}
+footer#footer.open {
+  translate: 0 0;
+}
+footer#footer.open span.footer-button {
+  rotate: 180deg;
+}
+footer#footer.open span.footer-button img {
+  translate: 0 20%;
 }
 
 /*# sourceMappingURL=index.css.map */

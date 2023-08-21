@@ -1,0 +1,6 @@
+<!-- sample rectangle -->
+<svg viewBox="0 0 200 200" width="200" height="200" stroke-width="10" xmlns="http://www.w3.org/2000/svg">
+  <polygon fill="none" stroke="black" points="50 5, 150 5, 195 70, 100 195, 5 70, 50 5"/>
+  <polyline fill="none"  stroke="black" points="50 2, 100 65, 150 2"/>
+  <line fill="none"  stroke="black" x1="5" y1="70" x2="195" y2="70"/>
+</svg>
