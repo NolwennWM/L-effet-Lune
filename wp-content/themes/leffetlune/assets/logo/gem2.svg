@@ -1,0 +1,12 @@
+<svg viewBox="0 0 200 200" width="200" height="200" stroke-width="10" xmlns="http://www.w3.org/2000/svg">
+  <polygon stroke="black" fill="none" points="60 5, 140 5, 195 60, 195 140, 140 195, 60 195, 5 140, 5 60, 60 5"/>
+  <polygon stroke="black" fill="none" points="75 35, 125 35, 165 75, 165 125, 125 165, 75 165, 35 125, 35 75, 75 35"/>
+  <line stroke="black" x1="60" y1="5" x2="75" y2="35"/>
+  <line stroke="black" x1="140" y1="5" x2="125" y2="35"/>
+  <line stroke="black" x1="195" y1="60" x2="165" y2="75"/>
+  <line stroke="black" x1="195" y1="140" x2="165" y2="125"/>
+  <line stroke="black" x1="140" y1="195" x2="125" y2="165"/>
+  <line stroke="black" x1="60" y1="195" x2="75" y2="165"/>
+  <line stroke="black" x1="5" y1="140" x2="35" y2="125"/>
+  <line stroke="black" x1="5" y1="60" x2="35" y2="75"/>
+</svg>

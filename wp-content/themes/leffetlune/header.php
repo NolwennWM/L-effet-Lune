@@ -21,13 +21,11 @@
         <canvas id="background"></canvas>
         <!-- Header -->
         <header class="header">
-            <h1>
-                <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                    <?php bloginfo( 'name' ); ?>
-                </a>
-            </h1>
-            
-        
+            <?php 
+                if(function_exists('the_custom_logo'))the_custom_logo();
+            ?>
+            <h1 class="site-title"><?php bloginfo('name') ?></h1>
+            <p class="site-slogan"><?php bloginfo("description") ?></p>
             <nav id="header-navigation">
                 <button class="burger">
                     <span class="line"></span>

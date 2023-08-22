@@ -2,6 +2,58 @@ header.header
 {
     z-index: 15;
     background-color: $color-primary;
+    padding: $padding-small;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto 1fr 70px;
+    gap: $gap-small;
+    @include media("tablet")
+    {
+        grid-template-columns: auto 1fr 150px;
+    }
+    a.custom-logo-link
+    {
+        grid-area: 1 / 1 / 3 / 2;
+        img
+        {
+            transition: height $transition-short, width $transition-short;
+            height: 75px;
+            width: 75px;
+            @include media("tablet")
+            {
+                height: 150px;
+                width: 150px;
+            }
+        }
+    }
+    .site-title
+    {
+        grid-area: 1 / 2 / 2 / 3;
+        text-align: center;
+        @include flex(center, center)
+    }
+    .site-slogan
+    {
+        grid-area: 2 / 2 / 3 / 3;
+        text-align: center;
+        overflow: hidden;
+        height: 3em;
+        transition: height $transition-short;
+
+    }
+    &.close
+    {
+        grid-template-columns: auto 1fr 50px;
+        a.custom-logo-link img
+        {
+            height: 50px;
+            width: 50px;
+        }
+        .site-slogan
+        {
+            height: 0;
+        }
+    }
     nav#header-navigation
     {
         button.burger
@@ -9,10 +61,10 @@ header.header
             cursor: pointer;
             background-color: $color-primary-dark;
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 80px;
-            height: 80px;
+            top: $padding-small/2;
+            right: $padding-small;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             border: none;
             transition: scale .5s, top .5s, right .5s, translate .5s;

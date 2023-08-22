@@ -29,6 +29,14 @@ function nwm_theme_setup()
             'footer'  => __( 'Footer Links Menu', 'leffetlune' ),
         ]
     );
+    add_theme_support(
+        'custom-logo',
+        array(
+            'height'      => 240,
+            'width'       => 240,
+            'flex-height' => true,
+        )
+    );
 }
 
 ?>

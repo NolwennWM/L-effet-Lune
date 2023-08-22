@@ -79,8 +79,8 @@ if ( ! function_exists( 'twentysixteen_setup' ) ) :
 		add_theme_support(
 			'custom-logo',
 			array(
-				'height'      => 240,
-				'width'       => 240,
+				'height'      => 125,
+				'width'       => 125,
 				'flex-height' => true,
 			)
 		);
