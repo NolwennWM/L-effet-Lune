@@ -1,4 +1,10 @@
-<?php get_header(); ?>
+<?php 
+/**
+ * Template général chargé si aucun template plus précis 
+ * n'a été trouvé.
+ */
+
+get_header(); ?>
 <p>index.php</p>
 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis officia ratione quasi, praesentium sequi cupiditate. Nemo velit necessitatibus voluptas laboriosam maiores doloribus rerum quis quam, assumenda excepturi doloremque! Expedita, doloremque.
 Sunt blanditiis modi repudiandae reiciendis asperiores, cumque quia exercitationem ex dolorum quod. Incidunt labore a sequi accusantium blanditiis delectus sunt, quidem sed. Quos labore accusantium culpa eum reiciendis minus dolores!

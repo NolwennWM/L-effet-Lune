@@ -1,10 +1,6 @@
 <?php 
 /**
  * Template gérant l'affichage de l'en-tête du site.
- *  
- * @package WordPress
- * @subpackage Blue Letter Cave
- * @since Blue Letter Cave 0.1
  */
 ?>
 <!DOCTYPE html>
@@ -32,13 +28,13 @@
                     <span class="line"></span>
                     <span class="line"></span>
                 </button>
-                <?php if (!is_woocommerce() && has_nav_menu('primary')) : ?>
+                <?php if ( !is_commerce_related() && has_nav_menu('primary')) : ?>
                     <?php wp_nav_menu(
                         [
                             'theme_location' => 'primary',
                             'menu_class' => 'menu',
                         ]) ?>
-                <?php elseif(is_woocommerce() && has_nav_menu("shop")): ?>
+                <?php elseif(is_commerce_related() && has_nav_menu("shop")): ?>
                     <?php  wp_nav_menu(
                         [
                             'theme_location' => 'shop',

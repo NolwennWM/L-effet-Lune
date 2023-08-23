@@ -1,10 +1,6 @@
 <?php 
 /**
  * Template gérant l'affichage du pied de page du site.
- *  
- * @package WordPress
- * @subpackage Blue Letter Cave
- * @since Blue Letter Cave 0.1
  */
 ?>        
         </main><!-- main.content -->

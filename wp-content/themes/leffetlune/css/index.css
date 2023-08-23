@@ -224,6 +224,23 @@ header.header nav#header-navigation.open ul.menu {
   right: 0;
 }
 
+.default-content {
+  border: 2px solid #8F1183;
+  border-radius: 10px;
+  background-color: #9be67d;
+  padding: 10px;
+  width: 90%;
+  margin: auto;
+}
+@media screen and (min-width: 782px) {
+  .default-content {
+    width: 80%;
+  }
+}
+.default-content p {
+  text-align: justify;
+}
+
 footer#footer {
   z-index: 13;
   position: absolute;

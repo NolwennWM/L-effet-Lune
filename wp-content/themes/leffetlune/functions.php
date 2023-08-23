@@ -6,20 +6,37 @@ add_theme_support( 'title-tag' );
 add_action( 'wp_enqueue_scripts', 'nwm_register_assets' );
 add_action( 'after_setup_theme', 'nwm_theme_setup' );
 
-add_filter("script_loader_tag", "nwm_filter_tags", 10, 3);
-
+add_filter("script_loader_tag", "nwm_filter_script_tags", 10, 3);
+/**
+ * Ajoute les scripts et styles.
+ *
+ * @return void
+ */
 function nwm_register_assets()
 {
     wp_enqueue_style( "main", get_stylesheet_uri());
     wp_enqueue_style( "index", get_template_directory_uri()."/css/index.css");
     wp_enqueue_script("index", get_template_directory_uri()."/js/index.js");
 }
-function nwm_filter_tags($tag, $handle, $src)
+/**
+ * Filtre les balises scripts pour y ajouter le type module et l'attribut defer
+ *
+ * @param string $tag
+ * @param string $handle
+ * @param string $src
+ * @return string
+ */
+function nwm_filter_script_tags(string $tag, string $handle, string $src):string
 {
     if($handle !== "index") return $tag;
     return '<script src="'. esc_url($src).'" type="module" defer></script>';
 }
-function nwm_theme_setup()
+/**
+ * Paramètre le thème.
+ *
+ * @return void
+ */
+function nwm_theme_setup(): void
 {
     register_nav_menus(
         [
@@ -38,5 +55,13 @@ function nwm_theme_setup()
         )
     );
 }
-
+/**
+ * Vérifie si on est sur une page liée à la boutique.
+ *
+ * @return boolean
+ */
+function is_commerce_related():bool
+{
+    return is_woocommerce() || is_cart() || is_checkout() || is_account_page();
+}
 ?>
