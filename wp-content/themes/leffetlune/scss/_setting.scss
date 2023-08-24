@@ -4,6 +4,7 @@ $color-green: #70DB45;
 $color-purple: #8F1183;
 $color-black: black;
 $color-black-transparent: rgba(0, 0, 0, 0.3);
+$color-white: antiquewhite;
 
 // variants colors :
 $color-primary: $color-green;
@@ -12,6 +13,7 @@ $color-primary-light: color.scale($color-primary, $lightness: 30%);
 $color-primary-dark: color.scale($color-primary, $lightness: -30%);
 $color-secondary-light: color.scale($color-secondary, $lightness: 30%);
 $color-secondary-dark: color.scale($color-secondary, $lightness: -30%);
+$color-primary-light-transparent: color.scale($color-primary-light, $alpha: -20%);
 
 // gap, padding et margin :
 $gap-small: 10px;

@@ -7,9 +7,14 @@ get_header(); ?>
 <?php if(have_posts()):  ?>
     <?php while(have_posts()): the_post(); ?>
 
-    <?php the_title(); ?>
-    <?php the_content(); ?>
-
+        <div class="default-content">
+            <h2 class="page-title">
+                <?php the_title(); ?>
+            </h2>
+            <div class="page-content">
+                <?php the_content(); ?>
+            </div>
+        </div>
     <?php endwhile; ?>
 <?php endif; ?>
-<?php wp_footer(); ?>
+<?php get_footer(); ?>

@@ -4,4 +4,4 @@
  */
 get_header(); ?>
 <p>Ceci est une page 404.</p>
-<?php wp_footer(); ?>
+<?php get_footer(); ?>

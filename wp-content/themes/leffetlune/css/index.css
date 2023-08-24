@@ -227,7 +227,7 @@ header.header nav#header-navigation.open ul.menu {
 .default-content {
   border: 2px solid #8F1183;
   border-radius: 10px;
-  background-color: #9be67d;
+  background-color: rgba(155, 230, 125, 0.8);
   padding: 10px;
   width: 90%;
   margin: auto;
@@ -239,6 +239,27 @@ header.header nav#header-navigation.open ul.menu {
 }
 .default-content p {
   text-align: justify;
+}
+
+div.woocommerce ul.products {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+div.woocommerce ul.products li.product {
+  border: 1px solid #640c5c;
+  background-color: antiquewhite;
+  border-radius: 5px;
+  float: none;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+div.woocommerce ul.products li.product img + * {
+  margin-left: 1.5em;
+}
+div.woocommerce div.single-product div.product div.summary p.price {
+  color: #8F1183;
 }
 
 footer#footer {

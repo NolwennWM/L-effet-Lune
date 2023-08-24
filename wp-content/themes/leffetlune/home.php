@@ -14,4 +14,4 @@ get_header(); ?>
 
     <?php endwhile; ?>
 <?php endif; ?>
-<?php wp_footer(); ?>
+<?php get_footer(); ?>

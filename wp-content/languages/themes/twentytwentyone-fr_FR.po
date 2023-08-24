@@ -30,11 +30,6 @@ msgstr "<span class=\"nav-short\">Publications</span> plus anciennes"
 msgid "Newer <span class=\"nav-short\">posts</span>"
 msgstr "<span class=\"nav-short\">Publications</span> plus récentes"
 
-#: classes/class-twenty-twenty-one-customize-notice-control.php:40
-#: classes/class-twenty-twenty-one-dark-mode.php:178
-msgid "https://wordpress.org/documentation/article/twenty-twenty-one/#dark-mode-support"
-msgstr ""
-
 #. translators: %s: Twenty Twenty-One support article URL.
 #: classes/class-twenty-twenty-one-dark-mode.php:177
 msgid "Dark Mode is a device setting. If a visitor to your site requests it, your site will be shown with a dark background and light text. <a href=\"%s\">Learn more about Dark Mode.</a>"
