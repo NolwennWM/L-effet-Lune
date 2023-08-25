@@ -8,6 +8,7 @@ get_header(); ?>
     <?php while(have_posts()): the_post(); ?>
 
     <div class="default-content">
+        <?php get_slider(); ?>
         <h2 class="page-title">
             <?php the_title(); ?>
         </h2>

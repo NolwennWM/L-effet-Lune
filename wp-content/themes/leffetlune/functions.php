@@ -7,6 +7,8 @@ add_action( 'wp_enqueue_scripts', 'nwm_register_assets' );
 add_action( 'after_setup_theme', 'nwm_theme_setup' );
 
 add_filter("script_loader_tag", "nwm_filter_script_tags", 10, 3);
+
+add_shortcode("nwmslider", "get_slider");
 /**
  * Ajoute les scripts et styles.
  *
@@ -63,5 +65,10 @@ function nwm_theme_setup(): void
 function is_commerce_related():bool
 {
     return is_woocommerce() || is_cart() || is_checkout() || is_account_page();
+}
+
+function get_slider()
+{
+    get_template_part("template/slider", null, []);
 }
 ?>
