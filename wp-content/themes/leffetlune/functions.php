@@ -67,8 +67,10 @@ function is_commerce_related():bool
     return is_woocommerce() || is_cart() || is_checkout() || is_account_page();
 }
 
-function get_slider()
+function get_slider($attr, $content)
 {
-    get_template_part("template/slider", null, []);
+    $count = substr_count($content, "<img");
+    if($count < 1)return;
+    get_template_part("template/slider", null, ["images"=>$content, "count"=>$count]);
 }
 ?>

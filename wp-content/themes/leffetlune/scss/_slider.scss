@@ -1,0 +1,42 @@
+.slider
+{
+    position: relative;
+    .items
+    {
+        overflow: hidden;
+        img
+        {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover;
+        }
+    }
+    .btns
+    {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        @include flex(space-between, center);
+        .btns-selectors
+        {
+            align-self: flex-end;
+        }
+        .slider-btn
+        {
+            display: inline-block;
+            width: 80px;
+            aspect-ratio: 1/1;
+            img
+            {
+                width: 100%;
+                height: 100%;
+            }
+            &.btn-right
+            {
+                order: 1;
+            }
+        }
+    }
+}
