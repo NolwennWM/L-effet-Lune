@@ -61,7 +61,7 @@ header.header
             cursor: pointer;
             background-color: $color-primary-dark;
             position: absolute;
-            top: $padding-small/2;
+            top: calc($padding-small/2);
             right: $padding-small;
             width: 60px;
             height: 60px;

@@ -48,26 +48,26 @@ body div.page main.content {
   overflow-y: auto;
   z-index: 10;
   padding-bottom: 60px;
-  scrollbar-color: #48a921 #9be67d;
+  scrollbar-color: #127345 #3ce194;
 }
 body div.page main.content::-webkit-scrollbar {
-  background-color: #9be67d;
+  background-color: #3ce194;
 }
 body div.page main.content::-webkit-scrollbar-thumb {
-  background-color: #48a921;
+  background-color: #127345;
 }
 body div.page main.content::-webkit-scrollbar-button {
-  background-color: #9be67d;
+  background-color: #3ce194;
   height: 13px;
   border-style: solid;
 }
 body div.page main.content::-webkit-scrollbar-button:decrement {
   border-width: 0 8px 8px 8px;
-  border-color: transparent transparent #48a921 transparent;
+  border-color: transparent transparent #127345 transparent;
 }
 body div.page main.content::-webkit-scrollbar-button:increment {
   border-width: 8px 8px 0 8px;
-  border-color: #48a921 transparent transparent transparent;
+  border-color: #127345 transparent transparent transparent;
 }
 body div.page canvas#background {
   z-index: 1;
@@ -79,7 +79,7 @@ body div.page canvas#background {
 
 header.header {
   z-index: 15;
-  background-color: #70DB45;
+  background-color: #19a463;
   padding: 10px;
   display: grid;
   grid-template-rows: auto auto;
@@ -131,7 +131,7 @@ header.header.close .site-slogan {
 }
 header.header nav#header-navigation button.burger {
   cursor: pointer;
-  background-color: #48a921;
+  background-color: #127345;
   position: absolute;
   top: 5px;
   right: 10px;
@@ -145,7 +145,7 @@ header.header nav#header-navigation button.burger {
 header.header nav#header-navigation button.burger span.line {
   width: 33%;
   height: 5%;
-  background-color: #8F1183;
+  background-color: #5e1528;
   display: block;
   position: absolute;
   top: 50%;
@@ -177,7 +177,7 @@ header.header nav#header-navigation ul.menu li.menu-item {
   width: 90px;
   aspect-ratio: 1/1;
   padding: 5px;
-  background-color: #9be67d;
+  background-color: #3ce194;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -191,7 +191,7 @@ header.header nav#header-navigation ul.menu li.menu-item {
   transition: translate 0.3s, scale 0.3s, transform 0.3s;
 }
 header.header nav#header-navigation ul.menu li.menu-item a {
-  color: #8F1183;
+  color: #5e1528;
   text-decoration: none;
   font-weight: bold;
   display: inline-block;
@@ -225,9 +225,9 @@ header.header nav#header-navigation.open ul.menu {
 }
 
 .default-content {
-  border: 2px solid #8F1183;
+  border: 2px solid #5e1528;
   border-radius: 10px;
-  background-color: rgba(155, 230, 125, 0.8);
+  background-color: rgba(60, 225, 148, 0.8);
   padding: 10px;
   width: 90%;
   margin: auto;
@@ -284,7 +284,7 @@ div.woocommerce ul.products {
   flex-wrap: wrap;
 }
 div.woocommerce ul.products li.product {
-  border: 1px solid #640c5c;
+  border: 1px solid #420f1c;
   background-color: antiquewhite;
   border-radius: 5px;
   float: none;
@@ -296,13 +296,13 @@ div.woocommerce ul.products li.product img + * {
   margin-left: 1.5em;
 }
 div.woocommerce div.single-product div.product div.summary p.price {
-  color: #8F1183;
+  color: #5e1528;
 }
 
 footer#footer {
   z-index: 13;
   position: absolute;
-  background-color: #70DB45;
+  background-color: #19a463;
   gap: 10px;
   padding: 10px;
   padding-top: 25px;
@@ -326,7 +326,7 @@ footer#footer span.footer-button {
   translate: -50% -50%;
   width: 50px;
   aspect-ratio: 1/1;
-  background-color: #70DB45;
+  background-color: #19a463;
   transition: rotate 1s, scale 0.3s;
   animation: pulse 8s infinite;
 }

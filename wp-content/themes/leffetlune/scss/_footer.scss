@@ -37,7 +37,7 @@ footer#footer
         {
             content: "";
             height: 150%;
-            width: $logo-small / 2;
+            width: calc($logo-small / 2);
             background: white;
             opacity: .2;
             position: absolute;
