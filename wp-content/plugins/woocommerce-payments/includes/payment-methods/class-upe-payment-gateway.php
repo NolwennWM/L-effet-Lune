@@ -10,7 +10,7 @@ namespace WCPay\Payment_Methods;
 use WC_Payments_API_Payment_Intention;
 use WC_Payments_API_Setup_Intention;
 use WCPay\Constants\Order_Status;
-use WCPay\Constants\Payment_Intent_Status;
+use WCPay\Constants\Intent_Status;
 use WCPay\Constants\Payment_Method;
 use WCPay\Constants\Payment_Type;
 use WCPay\Core\Server\Request\Create_Intention;
@@ -44,7 +44,9 @@ use WC_Payments_Utils;
 use WC_Payments_Features;
 use WCPay\Duplicate_Payment_Prevention_Service;
 use WP_User;
-
+use WC_Payments_Localization_Service;
+use WCPay\Payment_Information;
+use WCPay\Core\Server\Request\Create_And_Confirm_Intention;
 
 /**
  * UPE Payment method extended from WCPay generic Gateway.
@@ -95,6 +97,7 @@ class UPE_Payment_Gateway extends WC_Payment_Gateway_WCPay {
 	 * @param Session_Rate_Limiter                 $failed_transaction_rate_limiter      - Session Rate Limiter instance.
 	 * @param WC_Payments_Order_Service            $order_service                        - Order class instance.
 	 * @param Duplicate_Payment_Prevention_Service $duplicate_payment_prevention_service - Service for preventing duplicate payments.
+	 * @param WC_Payments_Localization_Service     $localization_service                 - Localization service instance.
 	 */
 	public function __construct(
 		WC_Payments_API_Client $payments_api_client,
@@ -105,9 +108,10 @@ class UPE_Payment_Gateway extends WC_Payment_Gateway_WCPay {
 		array $payment_methods,
 		Session_Rate_Limiter $failed_transaction_rate_limiter,
 		WC_Payments_Order_Service $order_service,
-		Duplicate_Payment_Prevention_Service $duplicate_payment_prevention_service
+		Duplicate_Payment_Prevention_Service $duplicate_payment_prevention_service,
+		WC_Payments_Localization_Service $localization_service
 	) {
-		parent::__construct( $payments_api_client, $account, $customer_service, $token_service, $action_scheduler_service, $failed_transaction_rate_limiter, $order_service, $duplicate_payment_prevention_service );
+		parent::__construct( $payments_api_client, $account, $customer_service, $token_service, $action_scheduler_service, $failed_transaction_rate_limiter, $order_service, $duplicate_payment_prevention_service, $localization_service );
 		$this->title           = 'WooPayments';
 		$this->description     = '';
 		$this->checkout_title  = __( 'Popular payment methods', 'woocommerce-payments' );
@@ -562,7 +566,7 @@ class UPE_Payment_Gateway extends WC_Payment_Gateway_WCPay {
 					throw new Exception( WC_Payments_Utils::get_filtered_error_message( $e ) );
 				} catch ( API_Exception $e ) {
 					if ( 'wcpay_blocked_by_fraud_rule' === $e->get_error_code() ) {
-						$this->order_service->mark_order_blocked_for_fraud( $order, $payment_intent_id, Payment_Intent_Status::CANCELED );
+						$this->order_service->mark_order_blocked_for_fraud( $order, $payment_intent_id, Intent_Status::CANCELED );
 					}
 					throw $e;
 				}
@@ -583,7 +587,7 @@ class UPE_Payment_Gateway extends WC_Payment_Gateway_WCPay {
 				$this->order_service->attach_intent_info_to_order( $order, $intent_id, $intent_status, $payment_method, $customer_id, $charge_id, $currency );
 				$this->attach_exchange_info_to_order( $order, $charge_id );
 				$this->set_payment_method_title_for_order( $order, $payment_method_type, $payment_method_details );
-				if ( Payment_Intent_Status::SUCCEEDED === $intent_status ) {
+				if ( Intent_Status::SUCCEEDED === $intent_status ) {
 					$this->duplicate_payment_prevention_service->remove_session_processing_order( $order->get_id() );
 				}
 				$this->order_service->update_order_status_from_intent( $order, $updated_payment_intent );
@@ -809,7 +813,7 @@ class UPE_Payment_Gateway extends WC_Payment_Gateway_WCPay {
 
 				$this->order_service->attach_intent_info_to_order( $order, $intent_id, $status, $payment_method_id, $customer_id, $charge_id, $currency );
 				$this->attach_exchange_info_to_order( $order, $charge_id );
-				if ( Payment_Intent_Status::SUCCEEDED === $status ) {
+				if ( Intent_Status::SUCCEEDED === $status ) {
 					$this->duplicate_payment_prevention_service->remove_session_processing_order( $order->get_id() );
 				}
 				$this->order_service->update_order_status_from_intent( $order, $intent );
@@ -818,7 +822,7 @@ class UPE_Payment_Gateway extends WC_Payment_Gateway_WCPay {
 
 				static::remove_upe_payment_intent_from_session();
 
-				if ( Payment_Intent_Status::REQUIRES_ACTION === $status ) {
+				if ( Intent_Status::REQUIRES_ACTION === $status ) {
 					// I don't think this case should be possible, but just in case...
 					$next_action = $intent->get_next_action();
 					if ( isset( $next_action['type'] ) && 'redirect_to_url' === $next_action['type'] && ! empty( $next_action['redirect_to_url']['url'] ) ) {
@@ -999,7 +1003,7 @@ class UPE_Payment_Gateway extends WC_Payment_Gateway_WCPay {
 
 				$skip_currency_check       = ! $force_currency_check && is_admin();
 				$processing_payment_method = $this->payment_methods[ $payment_method_id ];
-				if ( $processing_payment_method->is_enabled_at_checkout() && ( $skip_currency_check || $processing_payment_method->is_currency_valid( $this->get_account_default_currency(), $order_id ) ) ) {
+				if ( $processing_payment_method->is_enabled_at_checkout() && ( $skip_currency_check || $processing_payment_method->is_currency_valid( $this->get_account_domestic_currency(), $order_id ) ) ) {
 					$status = $active_payment_methods[ $payment_method_capability_key ]['status'] ?? null;
 					if ( 'active' === $status ) {
 						$enabled_payment_methods[] = $payment_method_id;
@@ -1144,7 +1148,7 @@ class UPE_Payment_Gateway extends WC_Payment_Gateway_WCPay {
 	 * @return string Filtered gateway title.
 	 */
 	public function maybe_filter_gateway_title( $title, $id ) {
-		if ( ! ( WC_Payments_Features::is_upe_split_enabled() || WC_Payments_Features::is_upe_deferred_intent_enabled() ) && self::GATEWAY_ID === $id && $this->title === $title ) {
+		if ( ! WC_Payments_Features::is_upe_deferred_intent_enabled() && self::GATEWAY_ID === $id && $this->title === $title ) {
 			$title                   = $this->checkout_title;
 			$enabled_payment_methods = $this->get_payment_method_ids_enabled_at_checkout();
 
@@ -1163,9 +1167,25 @@ class UPE_Payment_Gateway extends WC_Payment_Gateway_WCPay {
 	 * Sets the payment method title on the order for emails.
 	 *
 	 * @param WC_Order $order   WC Order object.
+	 *
+	 * @return void
 	 */
 	public function set_payment_method_title_for_email( $order ) {
-		$payment_method_id      = $this->order_service->get_payment_method_id_for_order( $order );
+		$payment_gateway = wc_get_payment_gateway_by_order( $order );
+
+		if ( ! empty( $payment_gateway ) && self::GATEWAY_ID !== $payment_gateway->id || ! WC_Payments_Features::is_upe_legacy_enabled() ) {
+			return;
+		}
+
+		$payment_method_id = $this->order_service->get_payment_method_id_for_order( $order );
+
+		if ( ! $payment_method_id ) {
+			$order->set_payment_method_title( $this->title );
+			$order->save();
+
+			return;
+		}
+
 		$payment_method_details = $this->payments_api_client->get_payment_method( $payment_method_id );
 		$payment_method_type    = $this->get_payment_method_type_from_payment_details( $payment_method_details );
 		$this->set_payment_method_title_for_order( $order, $payment_method_type, $payment_method_details );
@@ -1227,7 +1247,7 @@ class UPE_Payment_Gateway extends WC_Payment_Gateway_WCPay {
 			return false;
 		}
 		return $payment_method->is_reusable()
-			&& ( is_admin() || $payment_method->is_currency_valid( $this->get_account_default_currency() ) );
+			&& ( is_admin() || $payment_method->is_currency_valid( $this->get_account_domestic_currency() ) );
 	}
 
 	/**
