@@ -2,7 +2,8 @@ footer#footer
 {
     z-index: 13;
     position: absolute;
-    background-color: $color-primary;
+    // background-color: $color-primary;
+    @extend %glass;
     gap: $gap-small;
     padding: $padding-small;
     padding-top: calc($logo-small / 2);
@@ -16,7 +17,7 @@ footer#footer
     span.footer-button
     {
         cursor: pointer;
-        overflow: hidden;
+        // overflow: hidden;
         border-radius: 50%;
         padding: $padding-small;
         position: absolute;
@@ -33,27 +34,7 @@ footer#footer
             width: 100%;
             height: 100%;
         }
-        &::after
-        {
-            content: "";
-            height: 150%;
-            width: calc($logo-small / 2);
-            background: white;
-            opacity: .2;
-            position: absolute;
-            top: -20%;
-            left: -100%;
-            rotate: 35deg;
-            transition: left $transition-normal $bezier-fast-slow;
-        }
-        &:hover
-        {
-            scale: 1.5;
-            &::after
-            {
-                left: 120%;
-            }
-        }
+        @extend %flash;
     }
     ul
     {
@@ -76,6 +57,15 @@ footer#footer
             {
                 translate: 0 20%
             }
+        }
+    }
+    a
+    {
+        color: inherit;
+        text-decoration: none;
+        &:visited
+        {
+            color: inherit;
         }
     }
 }

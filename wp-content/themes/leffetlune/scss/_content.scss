@@ -2,7 +2,9 @@
 {
     border: 2px solid $color-secondary;
     border-radius: 10px;
-    background-color: $color-primary-light-transparent;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    // background-color: $color-primary-light-transparent;
+    @extend %glass;
     padding: $padding-small;
     width: 90%;
     margin: auto;

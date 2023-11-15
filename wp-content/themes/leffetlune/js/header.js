@@ -37,6 +37,7 @@ export class Header {
     toggleHeader() {
         if (!this.scrollElement || !this.header)
             return;
+        console.log(this.scrollElement.scrollTop === 0 && this.timestamp < Date.now() - 500);
         if (this.scrollElement.scrollTop === 0 && this.timestamp < Date.now() - 500)
             this.header.classList.remove(this.closeClass);
         else if (!this.header.classList.contains(this.closeClass)) {

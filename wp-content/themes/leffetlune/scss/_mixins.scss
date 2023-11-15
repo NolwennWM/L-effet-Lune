@@ -28,3 +28,35 @@
         }
     }
 }
+%glass
+{
+    backdrop-filter: blur(6.6px);
+    -webkit-backdrop-filter: blur(6.6px);
+    // background-color: $color-primary-light-transparent;
+    background-image: linear-gradient(45deg, $color-primary-transparent, $color-secondary-transparent);
+}
+%flash
+{
+    overflow: hidden;
+    &::after
+    {
+        content: "";
+        height: 150%;
+        width: calc($logo-small / 2);
+        background: white;
+        opacity: .2;
+        position: absolute;
+        top: -20%;
+        left: -100%;
+        rotate: 35deg;
+        transition: left $transition-normal $bezier-fast-slow;
+    }
+    &:hover
+    {
+        scale: 1.5;
+        &::after
+        {
+            left: 120%;
+        }
+    }
+}

@@ -4,6 +4,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+:root
+{
+    color: $color-white;
+}
 body
 {
     --admin-bar-size: #{$admin-bar-none};
@@ -37,29 +41,29 @@ body
             overflow-y: auto;
             z-index: 10;
             padding-bottom: $logo-small + $padding-small;
-            scrollbar-color: $color-primary-dark $color-primary-light;
+            scrollbar-color: $color-primary $color-primary-light-transparent;
             &::-webkit-scrollbar
             {
-                background-color: $color-primary-light;
+                background-color: $color-primary;
             }
             &::-webkit-scrollbar-thumb
             {
-                background-color: $color-primary-dark;
+                background-color: $color-primary-light-transparent;
             }
             &::-webkit-scrollbar-button
             {
-                background-color: $color-primary-light;
+                background-color: $color-primary;
                 height: 13px;
                 border-style: solid;
                 &:decrement
                 {
                     border-width: 0 8px 8px 8px;
-                    border-color: transparent transparent $color-primary-dark transparent;
+                    border-color: transparent transparent $color-primary transparent;
                 }
                 &:increment
                 {
                     border-width: 8px 8px 0 8px;
-                    border-color: $color-primary-dark transparent transparent transparent;
+                    border-color: $color-primary transparent transparent transparent;
                 }
             }
         }

@@ -17,31 +17,33 @@
         <canvas id="background"></canvas>
         <!-- Header -->
         <header class="header">
-            <?php 
-                if(function_exists('the_custom_logo'))the_custom_logo();
-            ?>
-            <h1 class="site-title"><?php bloginfo('name') ?></h1>
-            <p class="site-slogan"><?php bloginfo("description") ?></p>
-            <nav id="header-navigation">
-                <button class="burger">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                    <span class="line"></span>
-                </button>
-                <?php if ( !is_commerce_related() && has_nav_menu('primary')) : ?>
-                    <?php wp_nav_menu(
-                        [
-                            'theme_location' => 'primary',
-                            'menu_class' => 'menu',
-                        ]) ?>
-                <?php elseif(is_commerce_related() && has_nav_menu("shop")): ?>
-                    <?php  wp_nav_menu(
-                        [
-                            'theme_location' => 'shop',
-                            'menu_class' => 'menu',
-                        ]) ?>
-                <?php endif; ?>
-            </nav> <!-- #header-navigation -->
+            <div class="header-content">
+                <?php 
+                    if(function_exists('the_custom_logo'))the_custom_logo();
+                ?>
+                <h1 class="site-title"><?php bloginfo('name') ?></h1>
+                <p class="site-slogan"><?php bloginfo("description") ?></p>
+                <nav id="header-navigation">
+                    <button class="burger">
+                        <span class="line"></span>
+                        <span class="line"></span>
+                        <span class="line"></span>
+                    </button>
+                    <?php if ( !is_commerce_related() && has_nav_menu('primary')) : ?>
+                        <?php wp_nav_menu(
+                            [
+                                'theme_location' => 'primary',
+                                'menu_class' => 'menu',
+                            ]) ?>
+                    <?php elseif(is_commerce_related() && has_nav_menu("shop")): ?>
+                        <?php  wp_nav_menu(
+                            [
+                                'theme_location' => 'shop',
+                                'menu_class' => 'menu',
+                            ]) ?>
+                    <?php endif; ?>
+                </nav> <!-- #header-navigation -->
+            </div> <!-- .header-content -->
         </header> <!-- .header -->
         <!-- Contenu de la page -->
         <main class="content">

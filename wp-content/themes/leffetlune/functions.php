@@ -73,4 +73,5 @@ function get_slider($attr, $content)
     if($count < 1)return;
     get_template_part("template/slider", null, ["images"=>$content, "count"=>$count]);
 }
+
 ?>

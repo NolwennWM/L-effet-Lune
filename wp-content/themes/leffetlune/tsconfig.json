@@ -2,6 +2,7 @@
     "compilerOptions": {
         "outDir": "js",
         "target": "ESNext",
+        "module": "ESNext",
         "noEmitOnError": true,
         "strict": true
     },
