@@ -1,9 +1,10 @@
 jQuery( function($){
 	// on upload button click
+	const preview = $(".slider-preview");
+	const input = $(".slider_img");
 	$( 'body' ).on( 'click', '.slider-upload', function( event ){
 		event.preventDefault(); // prevent default link click and page refresh
 		
-		const input = $(".slider_img");
 		const imageId = input.val().split(",");
 		
 		const customUploader = wp.media({
@@ -18,7 +19,6 @@ jQuery( function($){
 			multiple: true
 		}).on( 'select', function() 
 		{
-			const preview = $(".slider-preview");
 			preview.text("");
 			input.val("");
 			customUploader.state().get( 'selection' ).forEach(element => {
@@ -27,11 +27,9 @@ jQuery( function($){
 					src: element.url,
 					alt: element.title
 				}).appendTo(preview);
-				input.val((i, val)=>val + (val?",":"")+ element.id)
+				input.val((i, val)=>val + (val?",":"")+ element.id);// Populate the hidden field with image ID
 			});
-			//button.removeClass( 'button' ).html( '<img src="' + attachment.url + '">'); // add image instead of "Upload Image"
-			//button.next().show(); // show "Remove image" link
-			//button.next().next().val( attachment.id ); // Populate the hidden field with image ID
+			$(".slider-remove").show();
 		})
 		
 		// already selected images
@@ -52,10 +50,11 @@ jQuery( function($){
 	
 	});
 	// on remove button click
-	// $( 'body' ).on( 'click', '.rudr-remove', function( event ){
-	// 	event.preventDefault();
-	// 	const button = $(this);
-	// 	button.next().val( '' ); // emptying the hidden field
-	// 	button.hide().prev().addClass( 'button' ).html( 'Upload image' ); // replace the image with text
-	// });
+	$( 'body' ).on( 'click', '.slider-remove', function( event ){
+		event.preventDefault();
+		const del = $(this);
+		input.val(''); // emptying the hidden field
+		preview.text("");
+		del.hide(); // replace the image with text
+	});
 });

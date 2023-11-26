@@ -149,10 +149,16 @@ function slider_settings_section_callback()
 function slider_settings_field_callback() 
 {
     $setting = get_slider_images();
+    ?> <a href="#" class="button slider-upload">Modifier image</a> <?php
+    if(isEmptySlider($setting)):
 	?>
-    <a href="#" class="button slider-upload">Modifier image</a>
-    <div class="slider-preview"><?php echo isEmptySlider($setting)?"":$setting["images"] ?></div>
-    <input type="hidden" class="slider_img" name="slider_images" value="<?php echo !isEmptySlider($setting) ? esc_attr( $setting["option"] ) : '';  ?>">
-    <?php
+        <div class="slider-preview"></div>
+        <input type="hidden" class="slider_img" name="slider_images" value="">
+    <?php else:
+    ?>
+        <div class="slider-preview"><?php echo $setting["images"] ?></div>
+        <input type="hidden" class="slider_img" name="slider_images" value="<?php echo esc_attr( $setting["option"] );  ?>">
+        <a href="#" class="button slider-remove">Supprimer Slider</a>
+    <?php endif;
 }
 ?>
