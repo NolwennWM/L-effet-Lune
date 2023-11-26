@@ -1,0 +1,12 @@
+.slider-preview {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.slider-preview img {
+  aspect-ratio: 16/9;
+  width: 25vw;
+  object-fit: cover;
+}
+
+/*# sourceMappingURL=admin.css.map */
