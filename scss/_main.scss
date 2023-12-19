@@ -1,0 +1,80 @@
+*, ::before, ::after
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root
+{
+    color: $color-white;
+}
+body
+{
+    --admin-bar-size: #{$admin-bar-none};
+    height: 100dvh;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(../assets/images/portrait-cave-1.jpg);
+    @include media("desktop")
+    {
+        background-image: url(../assets/images/landscape-cave-1.jpg);
+    }
+    &.admin-bar
+    {
+        --admin-bar-size: #{$admin-bar-long};
+        padding-bottom: var(--admin-bar-size);
+        @include media("tablet")
+        {
+            --admin-bar-size: #{$admin-bar-short};
+            padding-bottom: var(--admin-bar-size);
+        }
+    }
+    div.page
+    {
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        position: relative;
+        main.content
+        {
+            overflow-y: auto;
+            z-index: 10;
+            padding-top: $padding-small;
+            padding-bottom: $logo-small + $padding-small;
+            scrollbar-color: $color-primary $color-primary-light-transparent;
+            &::-webkit-scrollbar
+            {
+                background-color: $color-primary;
+            }
+            &::-webkit-scrollbar-thumb
+            {
+                background-color: $color-primary-light-transparent;
+            }
+            &::-webkit-scrollbar-button
+            {
+                background-color: $color-primary;
+                height: 13px;
+                border-style: solid;
+                &:decrement
+                {
+                    border-width: 0 8px 8px 8px;
+                    border-color: transparent transparent $color-primary transparent;
+                }
+                &:increment
+                {
+                    border-width: 8px 8px 0 8px;
+                    border-color: $color-primary transparent transparent transparent;
+                }
+            }
+        }
+        canvas#background
+        {
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: $color-black-transparent;
+        }
+    }
+}

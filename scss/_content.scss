@@ -1,0 +1,25 @@
+.default-content, .content > *:first-of-type
+{
+    border: 2px solid $color-secondary;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    // background-color: $color-primary-light-transparent;
+    @extend %glass;
+    padding: $padding-small;
+    width: 90%;
+    margin: auto;
+    @include media("tablet")
+    {
+        width: 80%;
+    }
+    p
+    {
+        text-align: justify;
+        padding: 1em 0;
+    }
+    ul
+    {
+        padding-left: $padding-normal;
+        list-style: disc inside url("../assets/logo/gem2-mini.svg") ;
+    }
+}
