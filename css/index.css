@@ -1,3 +1,7 @@
+@font-face {
+  font-family: moonstar;
+  src: url("../assets/fonts/moon_star/Moonstar.ttf");
+}
 footer#footer, .default-content, .content > *:first-of-type, header::before {
   backdrop-filter: blur(6.6px);
   -webkit-backdrop-filter: blur(6.6px);
@@ -108,6 +112,10 @@ body div.page canvas#background {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+h1, h2 {
+  font-family: moonstar, Arial, "Time New Roman";
 }
 
 header {
@@ -402,15 +410,15 @@ div.woocommerce div.single-product div.product div.summary p.price {
 }
 
 footer#footer {
-  z-index: 13;
+  z-index: 23;
   position: absolute;
   gap: 10px;
   padding: 10px;
   padding-top: 25px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto 1fr auto;
-  max-height: 60dvh;
+  grid-template-rows: 40dvh auto auto;
+  max-height: 80dvh;
   translate: 0 calc(100% - 25px);
   bottom: 0;
   width: 100%;
@@ -419,11 +427,13 @@ footer#footer {
 @media screen and (min-width: 782px) {
   footer#footer {
     grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto;
+    grid-template-rows: 40dvh auto;
+    max-height: 60dvh;
   }
 }
 footer#footer span.footer-button {
   cursor: pointer;
+  user-select: none;
   border-radius: 50%;
   padding: 10px;
   position: absolute;
@@ -444,6 +454,8 @@ footer#footer .footer-widget {
   grid-area: 1/1/2/3;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  width: 100%;
+  height: 100%;
   aspect-ratio: 1/1;
 }
 @media screen and (min-width: 782px) {

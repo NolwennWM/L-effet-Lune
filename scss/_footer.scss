@@ -1,6 +1,6 @@
 footer#footer
 {
-    z-index: 13;
+    z-index: 23;
     position: absolute;
     // background-color: $color-primary;
     @extend %glass;
@@ -10,8 +10,8 @@ footer#footer
     // @include flex(space-around, $wrap: wrap);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr auto;
-    max-height: 60dvh;
+    grid-template-rows: 40dvh auto auto;
+    max-height: 80dvh;
     // overflow-y: auto;
     translate: 0 calc(100% - $logo-small / 2);
     bottom: 0;
@@ -20,12 +20,14 @@ footer#footer
     @include media("tablet")
     {
         grid-template-columns: auto 1fr auto;
-        grid-template-rows: auto auto;
+        grid-template-rows: 40dvh auto;
+        max-height: 60dvh;
     }
     span.footer-button
     {
         cursor: pointer;
         // overflow: hidden;
+        user-select: none;
         border-radius: 50%;
         padding: $padding-small;
         position: absolute;
@@ -50,6 +52,8 @@ footer#footer
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         // width: 33%;
+        width: 100%;
+        height: 100%;
         aspect-ratio: 1/1;
         @include media("tablet")
         {
